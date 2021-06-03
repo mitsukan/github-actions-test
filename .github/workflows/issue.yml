@@ -30,3 +30,13 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase="$MY_SECRET_GPG" --output $HOME/my_secret.json my_secret.json.gpg
       - name: Print out file content
         run: cat $HOME/my_secret.json #testing to check that the secrets have been successfully created
+  
+  functions:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: dump
+        run: |
+          echo ${{ contains( 'hello', 'll' ) }}
+          echo ${{ startsWith( 'hello', 'he' ) }}
+          echo ${{ endsWith( 'hello', 'lo' ) }}
+          echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
