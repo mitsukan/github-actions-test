@@ -40,3 +40,16 @@ jobs:
           echo ${{ startsWith( 'hello', 'he' ) }}
           echo ${{ endsWith( 'hello', 'lo' ) }}
           echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
+
+  iffers:
+    runs-on: ubuntu-16.04
+    if: github.event_name == 'push'
+    steps:
+      - name: random step
+        run: thisisgonnafaillll
+      - name: force step even if last step failed
+        if: failure()
+        run: echo "Running step even if last step failedddd"
+      - name: Run step regardless
+        if: always()
+        run: echo "Running step always regardless of everything else"
