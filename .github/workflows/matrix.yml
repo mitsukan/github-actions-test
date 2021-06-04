@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Pull down node
         uses: actions/setup-node@v2
-          with:
-            node-version: '14'
+        with:
+          node-version: '14'
       - name: Log node version
         run: node -v
