@@ -1,55 +1,55 @@
-name: Create issue on commit
+# name: Create issue on commit
 
-on: [ push ]
+# on: [ push ]
 
-jobs:
-  # create_issue:
-  #   runs-on: ubuntu-latest 
-  #   permissions:
-  #     issues: write 
-  #   steps:
-  #     - name: Create issue using REST API
-  #       run: |
-  #         curl --request POST \
-  #         --url https://api.github.com/repos/${{ github.repository }}/issues \
-  #         --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-  #         --header 'content-type: application/json' \
-  #         --data '{
-  #           "title": "Automated issue for commit: ${{ github.sha }}",
-  #           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
-  #           }' \
-  #         --fail
-  decrypt:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: decrypt file
-        env:
-          MY_SECRET_GPG: ${{ secrets.MY_SECRET_GPG }}
-        run: |
-          gpg --quiet --batch --yes --decrypt --passphrase="$MY_SECRET_GPG" --output $HOME/my_secret.json my_secret.json.gpg
-      - name: Print out file content
-        run: cat $HOME/my_secret.json #testing to check that the secrets have been successfully created
+# jobs:
+#   # create_issue:
+#   #   runs-on: ubuntu-latest 
+#   #   permissions:
+#   #     issues: write 
+#   #   steps:
+#   #     - name: Create issue using REST API
+#   #       run: |
+#   #         curl --request POST \
+#   #         --url https://api.github.com/repos/${{ github.repository }}/issues \
+#   #         --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+#   #         --header 'content-type: application/json' \
+#   #         --data '{
+#   #           "title": "Automated issue for commit: ${{ github.sha }}",
+#   #           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+#   #           }' \
+#   #         --fail
+#   decrypt:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: decrypt file
+#         env:
+#           MY_SECRET_GPG: ${{ secrets.MY_SECRET_GPG }}
+#         run: |
+#           gpg --quiet --batch --yes --decrypt --passphrase="$MY_SECRET_GPG" --output $HOME/my_secret.json my_secret.json.gpg
+#       - name: Print out file content
+#         run: cat $HOME/my_secret.json #testing to check that the secrets have been successfully created
   
-  functions:
-    runs-on: ubuntu-16.04
-    steps:
-      - name: dump
-        run: |
-          echo ${{ contains( 'hello', 'll' ) }}
-          echo ${{ startsWith( 'hello', 'he' ) }}
-          echo ${{ endsWith( 'hello', 'lo' ) }}
-          echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
+#   functions:
+#     runs-on: ubuntu-16.04
+#     steps:
+#       - name: dump
+#         run: |
+#           echo ${{ contains( 'hello', 'll' ) }}
+#           echo ${{ startsWith( 'hello', 'he' ) }}
+#           echo ${{ endsWith( 'hello', 'lo' ) }}
+#           echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
 
-  iffers:
-    runs-on: ubuntu-16.04
-    if: github.event_name == 'push'
-    steps:
-      # - name: random step
-        # run: thisisgonnafaillll
-      - name: force step even if last step failed
-        if: failure()
-        run: echo "Running step even if last step failedddd"
-      - name: Run step regardless
-        if: always()
-        run: echo "Running step always regardless of everything else"
+#   iffers:
+#     runs-on: ubuntu-16.04
+#     if: github.event_name == 'push'
+#     steps:
+#       # - name: random step
+#         # run: thisisgonnafaillll
+#       - name: force step even if last step failed
+#         if: failure()
+#         run: echo "Running step even if last step failedddd"
+#       - name: Run step regardless
+#         if: always()
+#         run: echo "Running step always regardless of everything else"

@@ -1,29 +1,29 @@
-name: Shell Commands
+# name: Shell Commands
 
-on: [push]
+# on: [push]
 
-jobs:
-  run-shell-command:
-    runs-on: ubuntu-latest
-    steps:
-      - name: echo a string
-        run: echo "this is a string"
-      - name: multiline script
-        run: |
-          node -v
-          npm -v
-      - name: run python Commands
-        run: |
-          import platform
-          print
-          (platform.processor())
-        shell: python
-  run-windows-commands:
-    runs-on: windows-latest
-    needs: ["run-shell-command"]
-    steps:
-      - name: directory for powershell
-        run: Get-Location
-      - name: Directory Bash
-        run: pwd
-        shell: bash
+# jobs:
+#   run-shell-command:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: echo a string
+#         run: echo "this is a string"
+#       - name: multiline script
+#         run: |
+#           node -v
+#           npm -v
+#       - name: run python Commands
+#         run: |
+#           import platform
+#           print
+#           (platform.processor())
+#         shell: python
+#   run-windows-commands:
+#     runs-on: windows-latest
+#     needs: ["run-shell-command"]
+#     steps:
+#       - name: directory for powershell
+#         run: Get-Location
+#       - name: Directory Bash
+#         run: pwd
+#         shell: bash
